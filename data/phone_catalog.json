@@ -1,0 +1,2102 @@
+[
+  {
+    "id": 494,
+    "brand": "iPhone",
+    "name": "iPhone Air 256GB eSIM+eSIM (1+1yr Warranty)",
+    "storage": "256GB",
+    "colors": "",
+    "price": "4,760,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 495,
+    "brand": "iPhone",
+    "name": "iPhone 17 ProMax 2TB Physical Dual SIM (1yr Warranty)",
+    "storage": "",
+    "colors": "",
+    "price": "9,890,000 ks",
+    "stock": "outstock",
+    "tag": "Popular"
+  },
+  {
+    "id": 496,
+    "brand": "iPad",
+    "name": "iPad Pro 13\" M5 256GB WiFi",
+    "storage": "256GB",
+    "colors": "",
+    "price": "5,980,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 497,
+    "brand": "iPad",
+    "name": "iPad Pro 13\" M5 512GB WiFi",
+    "storage": "512GB",
+    "colors": "",
+    "price": "6,870,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 498,
+    "brand": "iPad",
+    "name": "iPad Pro 13\" M5 1TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "8,650,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 499,
+    "brand": "iPad",
+    "name": "iPad Pro 13\" M4 2TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "7,990,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 500,
+    "brand": "iPad",
+    "name": "iPad Pro 13\" M4 NanoG 2TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "8,290,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 501,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M5 256GB WiFi",
+    "storage": "256GB",
+    "colors": "",
+    "price": "4,650,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 502,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M5 512GB eSIM",
+    "storage": "512GB",
+    "colors": "",
+    "price": "6,430,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 503,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4 2TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "6,990,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 504,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4 2TB eSIM",
+    "storage": "",
+    "colors": "",
+    "price": "7,490,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 700,
+    "brand": "iPhone",
+    "name": "iPhone 17 (5G)",
+    "storage": "256GB Single Physical + eSIM",
+    "colors": "Black/White/Pink/Teal",
+    "price": "4,100,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 505,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4 NanoG 1TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "5,990,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 701,
+    "brand": "iPhone",
+    "name": "iPhone 17 (5G)",
+    "storage": "256GB Single Physical + eSIM",
+    "colors": "Black/White/Pink/Teal",
+    "price": "3,890,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 506,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4 NanoG 2TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "7,290,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 702,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro (5G)",
+    "storage": "256GB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "5,490,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 507,
+    "brand": "iPad",
+    "name": "iPad Air6 13\" M2 1TB WiFi",
+    "storage": "",
+    "colors": "",
+    "price": "4,790,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 703,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro (5G)",
+    "storage": "512GB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "6,420,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 508,
+    "brand": "iPad",
+    "name": "iPad Air6 13\" M2 512GB eSIM",
+    "storage": "512GB",
+    "colors": "",
+    "price": "4,690,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 704,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro (5G)",
+    "storage": "1TB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "7,340,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 509,
+    "brand": "iPad",
+    "name": "iPad Air6 13\" M2 1TB eSIM",
+    "storage": "",
+    "colors": "",
+    "price": "4,990,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 705,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro Max (5G)",
+    "storage": "256GB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "5,950,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 510,
+    "brand": "iPad",
+    "name": "iPad Air6 11\" M2 1TB eSIM",
+    "storage": "",
+    "colors": "",
+    "price": "4,190,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 706,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro Max (5G)",
+    "storage": "512GB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "6,880,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 511,
+    "brand": "iPad",
+    "name": "iPad 11th 256GB eSIM",
+    "storage": "256GB",
+    "colors": "",
+    "price": "2,950,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 707,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro Max (5G)",
+    "storage": "1TB Single Physical + eSIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "7,810,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 512,
+    "brand": "iPad",
+    "name": "Apple Pencil Pro (MX2D3)",
+    "storage": "",
+    "colors": "",
+    "price": "550,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 708,
+    "brand": "iPhone",
+    "name": "iPhone 17 Pro Max (5G)",
+    "storage": "2TB Physical Dual SIM",
+    "colors": "Black/White/Natural/Desert",
+    "price": "9,590,000 ks",
+    "stock": "outstock",
+    "tag": "Out Soon"
+  },
+  {
+    "id": 513,
+    "brand": "iPad",
+    "name": "Apple Pencil USB-C (MUWA3)",
+    "storage": "",
+    "colors": "",
+    "price": "380,000 ks",
+    "stock": "preorder",
+    "tag": "Accessory"
+  },
+  {
+    "id": 514,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4/M5 Magic Keyboard White",
+    "storage": "",
+    "colors": "",
+    "price": "1,580,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 515,
+    "brand": "iPad",
+    "name": "iPad Pro 11\" M4/M5 Magic Keyboard Black",
+    "storage": "",
+    "colors": "",
+    "price": "1,580,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 516,
+    "brand": "iPad",
+    "name": "Beats Solo 3",
+    "storage": "",
+    "colors": "",
+    "price": "590,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 517,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "4,356,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 518,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "3,872,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 519,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3a Pro",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,486,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 520,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3a",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,002,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 521,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3a",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,738,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 522,
+    "brand": "Nothing",
+    "name": "Nothing Phone 3a Clear Case",
+    "storage": "",
+    "colors": "",
+    "price": "60,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 523,
+    "brand": "Nothing",
+    "name": "CMF Head Phone Pro",
+    "storage": "",
+    "colors": "",
+    "price": "528,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 524,
+    "brand": "Nothing",
+    "name": "CMF Buds 2 INTL Ver",
+    "storage": "",
+    "colors": "",
+    "price": "220,000 ks",
+    "stock": "preorder",
+    "tag": "Accessory"
+  },
+  {
+    "id": 525,
+    "brand": "OnePlus",
+    "name": "OnePlus 12 1yr Official",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "3,599,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 526,
+    "brand": "Samsung",
+    "name": "Z Flip 7",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "5,485,000 ks",
+    "stock": "preorder",
+    "tag": "Foldable"
+  },
+  {
+    "id": 527,
+    "brand": "Samsung",
+    "name": "Z Flip 7FE",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "4,099,000 ks",
+    "stock": "preorder",
+    "tag": "Foldable"
+  },
+  {
+    "id": 528,
+    "brand": "Samsung",
+    "name": "S26 Ultra",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "7,220,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 529,
+    "brand": "Samsung",
+    "name": "S26 Ultra",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "6,297,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 530,
+    "brand": "Samsung",
+    "name": "S26+",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "6,198,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 531,
+    "brand": "Samsung",
+    "name": "S26+",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "5,506,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 532,
+    "brand": "Samsung",
+    "name": "S26",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "5,333,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 533,
+    "brand": "Samsung",
+    "name": "S26",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "4,756,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 534,
+    "brand": "Samsung",
+    "name": "S25 Ultra",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "4,999,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 535,
+    "brand": "Samsung",
+    "name": "S25FE",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "3,299,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 536,
+    "brand": "Samsung",
+    "name": "S25FE",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "2,879,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 537,
+    "brand": "Samsung",
+    "name": "Galaxy A36 5G",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,386,000 ks",
+    "stock": "outstock",
+    "tag": "New"
+  },
+  {
+    "id": 538,
+    "brand": "Samsung",
+    "name": "Galaxy A26 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,244,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 539,
+    "brand": "Samsung",
+    "name": "Galaxy M54 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "2,279,000 ks",
+    "stock": "outstock",
+    "tag": "New"
+  },
+  {
+    "id": 540,
+    "brand": "Samsung",
+    "name": "Galaxy A17 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,153,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 541,
+    "brand": "Samsung",
+    "name": "Galaxy A17 5G",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,015,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 542,
+    "brand": "Samsung",
+    "name": "Galaxy A17 4G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,003,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 543,
+    "brand": "Samsung",
+    "name": "Galaxy A17 4G",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "738,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 544,
+    "brand": "Samsung",
+    "name": "Galaxy A07 5G",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "790,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 545,
+    "brand": "Samsung",
+    "name": "Galaxy A07 4G",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "588,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 546,
+    "brand": "Samsung",
+    "name": "Galaxy A07 4G",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "519,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 547,
+    "brand": "Samsung",
+    "name": "Galaxy A07 4G",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "432,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 548,
+    "brand": "Samsung",
+    "name": "Tab S11",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "4,615,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 549,
+    "brand": "Samsung",
+    "name": "Tab S10 FE+",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "3,519,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 550,
+    "brand": "Samsung",
+    "name": "Tab S9 Ultra",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "5,289,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 551,
+    "brand": "Samsung",
+    "name": "Tab A11 Plus",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "1,431,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 552,
+    "brand": "Samsung",
+    "name": "Tab A11",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,163,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 553,
+    "brand": "Samsung",
+    "name": "Tab A11",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "958,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 554,
+    "brand": "Samsung",
+    "name": "Buds 3",
+    "storage": "",
+    "colors": "",
+    "price": "759,000 ks",
+    "stock": "instock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 555,
+    "brand": "Samsung",
+    "name": "Galaxy Smart Tag 2",
+    "storage": "",
+    "colors": "",
+    "price": "106,900 ks",
+    "stock": "instock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 558,
+    "brand": "Huawei",
+    "name": "Huawei Mate X7",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "7,339,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 559,
+    "brand": "Huawei",
+    "name": "Huawei Pura 80 Ultra",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "5,699,000 ks",
+    "stock": "preorder",
+    "tag": "Flagship"
+  },
+  {
+    "id": 560,
+    "brand": "Huawei",
+    "name": "Huawei Pura 80",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,899,000 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 561,
+    "brand": "Huawei",
+    "name": "Huawei MatePad 11.5\"",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,729,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 562,
+    "brand": "Huawei",
+    "name": "Huawei MatePad 11.5\"",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,399,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 563,
+    "brand": "Huawei",
+    "name": "Huawei MatePad 11.5\"",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "1,259,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 564,
+    "brand": "Huawei",
+    "name": "Huawei MatePad SE 11\"",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "949,000 ks",
+    "stock": "preorder",
+    "tag": "Tablet"
+  },
+  {
+    "id": 565,
+    "brand": "Huawei",
+    "name": "Huawei Watch D2",
+    "storage": "",
+    "colors": "",
+    "price": "1,379,000 ks",
+    "stock": "outstock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 566,
+    "brand": "Huawei",
+    "name": "Huawei Watch GT6 Pro (Titanium)",
+    "storage": "",
+    "colors": "",
+    "price": "1,399,000 ks",
+    "stock": "outstock",
+    "tag": "Popular"
+  },
+  {
+    "id": 567,
+    "brand": "Huawei",
+    "name": "Huawei Watch GT6 Pro (Black)",
+    "storage": "",
+    "colors": "",
+    "price": "1,059,000 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 568,
+    "brand": "Huawei",
+    "name": "Huawei Watch GT6 (46/41mm)",
+    "storage": "",
+    "colors": "",
+    "price": "779,000 ks",
+    "stock": "preorder",
+    "tag": "Accessory"
+  },
+  {
+    "id": 569,
+    "brand": "Huawei",
+    "name": "Huawei Sound Joy (Wireless Speaker)",
+    "storage": "",
+    "colors": "",
+    "price": "399,000 ks",
+    "stock": "outstock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 573,
+    "brand": "Honor",
+    "name": "Honor X9D +Gifts",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,699,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 574,
+    "brand": "Honor",
+    "name": "Honor X9D +Gifts",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,509,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 575,
+    "brand": "Honor",
+    "name": "Honor X9C",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,559,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 576,
+    "brand": "Honor",
+    "name": "Honor X7D",
+    "storage": "8/512GB",
+    "colors": "",
+    "price": "959,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 577,
+    "brand": "Honor",
+    "name": "Honor X7D",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "859,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 578,
+    "brand": "Honor",
+    "name": "Honor X6C",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "629,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 579,
+    "brand": "Honor",
+    "name": "Honor Choice Watch",
+    "storage": "",
+    "colors": "",
+    "price": "279,900 ks",
+    "stock": "instock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 580,
+    "brand": "Honor",
+    "name": "Honor Choice Band",
+    "storage": "",
+    "colors": "",
+    "price": "149,000 ks",
+    "stock": "instock",
+    "tag": "Accessory"
+  },
+  {
+    "id": 581,
+    "brand": "OPPO",
+    "name": "OPPO Reno 15 Pro Max",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "3,849,900 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 582,
+    "brand": "OPPO",
+    "name": "OPPO A6",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,399,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 583,
+    "brand": "OPPO",
+    "name": "OPPO A6",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,299,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 584,
+    "brand": "OPPO",
+    "name": "OPPO A5X",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "629,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 585,
+    "brand": "OPPO",
+    "name": "OPPO A5X",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "529,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 586,
+    "brand": "Realme",
+    "name": "Realme 14 Pro",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,199,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 587,
+    "brand": "Realme",
+    "name": "Realme 15T",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,509,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 588,
+    "brand": "Realme",
+    "name": "Realme C71",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "769,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 589,
+    "brand": "Realme",
+    "name": "Realme C71",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "679,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 590,
+    "brand": "Realme",
+    "name": "Realme Note 70",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "629,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 591,
+    "brand": "Realme",
+    "name": "Realme Note 70",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "529,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 592,
+    "brand": "Realme",
+    "name": "Realme Note 60X",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "434,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 593,
+    "brand": "VIVO",
+    "name": "VIVO X300 Pro",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "5,499,800 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 594,
+    "brand": "VIVO",
+    "name": "VIVO V60",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,749,800 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 595,
+    "brand": "VIVO",
+    "name": "VIVO Y31D",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,649,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 596,
+    "brand": "VIVO",
+    "name": "VIVO Y21D",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "959,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 597,
+    "brand": "VIVO",
+    "name": "VIVO Y19s",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "769,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 598,
+    "brand": "VIVO",
+    "name": "VIVO Y19s",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "719,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 599,
+    "brand": "VIVO",
+    "name": "VIVO Y04",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "619,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 600,
+    "brand": "VIVO",
+    "name": "VIVO Y04",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "549,800 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 601,
+    "brand": "Tecno",
+    "name": "Tecno Phantom V Flip 2 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "2,298,900 ks",
+    "stock": "preorder",
+    "tag": "Foldable"
+  },
+  {
+    "id": 602,
+    "brand": "Tecno",
+    "name": "Tecno Camon 40 Pro 5G",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,429,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 603,
+    "brand": "Tecno",
+    "name": "Tecno Camon 40 Pro 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,269,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 604,
+    "brand": "Tecno",
+    "name": "Tecno Camon 40",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,089,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 605,
+    "brand": "Tecno",
+    "name": "Tecno Pova Curve 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,329,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 606,
+    "brand": "Tecno",
+    "name": "Tecno Pova Slim",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,099,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 607,
+    "brand": "Tecno",
+    "name": "Tecno Spark 40 Pro+",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "969,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 608,
+    "brand": "Tecno",
+    "name": "Tecno Spark 40 Pro+",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "909,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 609,
+    "brand": "Tecno",
+    "name": "Tecno Spark 40C",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "549,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 610,
+    "brand": "Tecno",
+    "name": "Tecno Spark 40C",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 611,
+    "brand": "Tecno",
+    "name": "Tecno Spark GO 3",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 612,
+    "brand": "Tecno",
+    "name": "Tecno Spark GO 3",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "459,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 613,
+    "brand": "Tecno",
+    "name": "Tecno MegaPad Pro",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,099,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 614,
+    "brand": "Tecno",
+    "name": "Tecno MegaPad SE",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "846,900 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 615,
+    "brand": "Infinix",
+    "name": "Infinix Note 60 Pro",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,599,900 ks",
+    "stock": "preorder",
+    "tag": "Popular"
+  },
+  {
+    "id": 616,
+    "brand": "Infinix",
+    "name": "Infinix Note 60",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,319,900 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 617,
+    "brand": "Infinix",
+    "name": "Infinix Note Edge",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,209,900 ks",
+    "stock": "preorder",
+    "tag": "New"
+  },
+  {
+    "id": 618,
+    "brand": "Infinix",
+    "name": "Infinix Note 50 Pro",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,275,900 ks",
+    "stock": "outstock",
+    "tag": "Popular"
+  },
+  {
+    "id": 619,
+    "brand": "Infinix",
+    "name": "Infinix Note 50",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,029,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 620,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60 Pro+",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "799,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 621,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60 Pro",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "799,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 622,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60 Pro",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "749,900 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 623,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60i",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "629,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 624,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60i",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "579,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 625,
+    "brand": "Infinix",
+    "name": "Infinix Hot 60i",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "519,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 626,
+    "brand": "Infinix",
+    "name": "Infinix Smart 20",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 627,
+    "brand": "Infinix",
+    "name": "Infinix Smart 20",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "459,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 628,
+    "brand": "Infinix",
+    "name": "Infinix Smart 10",
+    "storage": "4/256GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 629,
+    "brand": "Infinix",
+    "name": "Infinix Smart 10",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "469,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 630,
+    "brand": "Infinix",
+    "name": "Infinix Smart 10",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "439,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 631,
+    "brand": "Infinix",
+    "name": "Infinix Smart 10",
+    "storage": "3/64GB",
+    "colors": "",
+    "price": "399,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 632,
+    "brand": "Infinix",
+    "name": "Infinix XPad 20",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "989,900 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 633,
+    "brand": "Infinix",
+    "name": "Infinix XPad 20",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "829,900 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 634,
+    "brand": "Infinix",
+    "name": "Infinix XPad 30E",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "849,900 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 635,
+    "brand": "ITEL",
+    "name": "ITEL S25 Ultra",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "749,900 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 636,
+    "brand": "ITEL",
+    "name": "ITEL S24",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 637,
+    "brand": "ITEL",
+    "name": "ITEL A90",
+    "storage": "3/64GB",
+    "colors": "",
+    "price": "319,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 638,
+    "brand": "ITEL",
+    "name": "ITEL City 100",
+    "storage": "4/256GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 639,
+    "brand": "ITEL",
+    "name": "ITEL City 100",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "429,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 640,
+    "brand": "ITEL",
+    "name": "ITEL Tab 30 GT 11\" Keyboard",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "829,900 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 641,
+    "brand": "NUBIA",
+    "name": "Nubia Neo 3 5G",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "979,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 642,
+    "brand": "NUBIA",
+    "name": "Nubia Neo 2",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "849,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 643,
+    "brand": "NUBIA",
+    "name": "Nubia V70",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "639,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 644,
+    "brand": "NUBIA",
+    "name": "Nubia V70 Design",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "539,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 645,
+    "brand": "NUBIA",
+    "name": "Nubia V70 Max",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "499,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 646,
+    "brand": "NUBIA",
+    "name": "ZTE Blade A36",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "429,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 647,
+    "brand": "NUBIA",
+    "name": "ZTE Blade A56",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "479,900 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 648,
+    "brand": "Meizu",
+    "name": "Meizu Lucky 08 Black",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "995,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 649,
+    "brand": "Meizu",
+    "name": "Meizu Lucky 08 Black",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "899,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 650,
+    "brand": "Meizu",
+    "name": "Meizu Note 22",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "760,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 651,
+    "brand": "Meizu",
+    "name": "Meizu Note 22",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "715,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 652,
+    "brand": "Meizu",
+    "name": "Meizu Note 21 Pro",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "699,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 653,
+    "brand": "Meizu",
+    "name": "Meizu Mblu 22 Pro",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "479,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 654,
+    "brand": "Meizu",
+    "name": "Meizu Mblu 22",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "327,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 655,
+    "brand": "Xiaomi",
+    "name": "Xiaomi 17 Pro Max (5G)",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "4,290,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 656,
+    "brand": "Xiaomi",
+    "name": "Xiaomi CiVi5 Pro (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,889,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 657,
+    "brand": "Xiaomi",
+    "name": "Xiaomi CiVi5 Pro Coffee (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,989,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 658,
+    "brand": "Redmi",
+    "name": "Redmi K90 Pro Max (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "2,859,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 659,
+    "brand": "Redmi",
+    "name": "Redmi K90 (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,889,000 ks",
+    "stock": "instock",
+    "tag": "Hot Deal"
+  },
+  {
+    "id": 660,
+    "brand": "Redmi",
+    "name": "Redmi K80 (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,489,000 ks",
+    "stock": "instock",
+    "tag": "Hot Deal"
+  },
+  {
+    "id": 661,
+    "brand": "Redmi",
+    "name": "Redmi K80 Ultra (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,789,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 662,
+    "brand": "Redmi",
+    "name": "Redmi K80 Ultra (5G)",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "1,959,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 663,
+    "brand": "Redmi",
+    "name": "Redmi Turbo 5 Max (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,629,000 ks",
+    "stock": "instock",
+    "tag": "Hot Deal"
+  },
+  {
+    "id": 664,
+    "brand": "Redmi",
+    "name": "Redmi Turbo 5 Max (5G)",
+    "storage": "12/512GB",
+    "colors": "",
+    "price": "1,799,000 ks",
+    "stock": "instock",
+    "tag": "Hot Deal"
+  },
+  {
+    "id": 665,
+    "brand": "Redmi",
+    "name": "Redmi Turbo 5 (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,489,000 ks",
+    "stock": "instock",
+    "tag": "Hot Deal"
+  },
+  {
+    "id": 666,
+    "brand": "Redmi",
+    "name": "Redmi Turbo 4 (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,189,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 667,
+    "brand": "Redmi",
+    "name": "Redmi Turbo 4 Pro (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,459,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 668,
+    "brand": "Redmi",
+    "name": "Redmi Note 15R",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "789,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 669,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 (5G)",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "809,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 670,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 (5G)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "869,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 671,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 Pro (5G)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,109,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 672,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 Pro (5G) (China)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,239,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 673,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 Pro Plus (5G) (China)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,459,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 674,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 Pro Plus (5G) Brown (China)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,479,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 675,
+    "brand": "Redmi",
+    "name": "Redmi Note 15 Pro Plus (5G) (China)",
+    "storage": "16/512GB",
+    "colors": "",
+    "price": "1,619,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 676,
+    "brand": "Redmi",
+    "name": "Redmi Note14 Pro Plus (5G)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,269,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 677,
+    "brand": "Redmi",
+    "name": "Redmi Note14 Pro (5G)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "989,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 678,
+    "brand": "Redmi",
+    "name": "Redmi Note14 Pro (5G)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,029,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 679,
+    "brand": "Redmi",
+    "name": "Redmi Note 14 (5G)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "799,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 680,
+    "brand": "Redmi",
+    "name": "Redmi Note 14 (5G)",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "769,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 681,
+    "brand": "Redmi",
+    "name": "Redmi Note13 Pro (5G)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "989,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 682,
+    "brand": "Redmi",
+    "name": "Redmi Note 13 (5G)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "795,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 683,
+    "brand": "Poco",
+    "name": "Poco C85 (Thai Global)",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "579,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 684,
+    "brand": "Poco",
+    "name": "Poco C71 (Thai Global)",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "479,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 685,
+    "brand": "Redmi",
+    "name": "Redmi A5 (4G) (Thai Global)",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "489,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 686,
+    "brand": "Redmi",
+    "name": "Redmi 15C (4G) (Thai Global)",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "595,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 687,
+    "brand": "Redmi",
+    "name": "Redmi 15 (4G) (Thai Global)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "759,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 688,
+    "brand": "Redmi",
+    "name": "Redmi 15 (4G) (Thai Global)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "789,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 689,
+    "brand": "Xiaomi",
+    "name": "Redmi Pad SE 8.7 (4G) Sim (Thai Global)",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "659,000 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 690,
+    "brand": "Xiaomi",
+    "name": "Redmi Pad SE Wi-Fi (China Version)",
+    "storage": "6/128GB",
+    "colors": "",
+    "price": "679,000 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 691,
+    "brand": "Xiaomi",
+    "name": "Redmi Pad 2 (4G) Sim",
+    "storage": "4/128GB",
+    "colors": "",
+    "price": "1,029,000 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 692,
+    "brand": "Xiaomi",
+    "name": "Xiaomi Pad 8 (Wi-Fi) (China Version)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,379,000 ks",
+    "stock": "instock",
+    "tag": "Tablet"
+  },
+  {
+    "id": 693,
+    "brand": "Xiaomi",
+    "name": "Xiaomi Pad 8 Pro (Wi-Fi) (China Version)",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "1,759,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 694,
+    "brand": "Xiaomi",
+    "name": "Xiaomi Pad 8 Pro (Wi-Fi) (China Version)",
+    "storage": "8/256GB",
+    "colors": "",
+    "price": "1,989,000 ks",
+    "stock": "instock",
+    "tag": "Popular"
+  },
+  {
+    "id": 695,
+    "brand": "Meizu",
+    "name": "Meizu Lucky 08 (5G) Black (Official Global)",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "995,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 696,
+    "brand": "iQoo",
+    "name": "iQoo Neo 10 Pro Plus (5G) Prism Pixel Blue",
+    "storage": "12/256GB",
+    "colors": "",
+    "price": "1,659,000 ks",
+    "stock": "instock",
+    "tag": "Flagship"
+  },
+  {
+    "id": 697,
+    "brand": "iQoo",
+    "name": "iQoo Neo 9 (5G) Red",
+    "storage": "16/256GB",
+    "colors": "",
+    "price": "1,099,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 698,
+    "brand": "VIVO",
+    "name": "ViVO Y05S (Thai Global) Black/Blue/Pink",
+    "storage": "4/64GB",
+    "colors": "",
+    "price": "589,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  },
+  {
+    "id": 699,
+    "brand": "OPPO",
+    "name": "OPPO A6i (Thai Global) White",
+    "storage": "8/128GB",
+    "colors": "",
+    "price": "699,000 ks",
+    "stock": "instock",
+    "tag": "New"
+  }
+]
