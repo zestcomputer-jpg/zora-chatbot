@@ -14,16 +14,37 @@ import re
 import logging
 import time
 import threading
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 import requests
 from difflib import SequenceMatcher
 from threading import Lock, Thread
+import uuid
 
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config["SECRET_KEY"] = os.urandom(24)
+
+# CORS configuration for web chat widget
+ALLOWED_ORIGINS = [
+    "https://zestmobileshop.com",
+    "https://www.zestmobileshop.com",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5500",
+]
+
+def add_cors_headers(response, origin=None):
+    """Add CORS headers to response."""
+    if origin and (origin in ALLOWED_ORIGINS or origin.endswith('.manus.computer')):
+        response.headers['Access-Control-Allow-Origin'] = origin
+    else:
+        response.headers['Access-Control-Allow-Origin'] = 'https://zestmobileshop.com'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, X-Session-ID'
+    response.headers['Access-Control-Max-Age'] = '86400'
+    return response
 
 # Facebook credentials (set via environment variables)
 PAGE_ACCESS_TOKEN = os.environ.get("PAGE_ACCESS_TOKEN", "")
@@ -802,7 +823,9 @@ def index():
         "endpoints": {
             "webhook": "/webhook",
             "health": "/health",
-            "test": "/test?q=<phone_model>"
+            "test": "/test?q=<phone_model>",
+            "web_chat": "/web-chat",
+            "web_chat_greeting": "/web-chat/greeting"
         }
     })
 
@@ -811,6 +834,23 @@ def index():
 def health():
     """Health check endpoint."""
     return jsonify({"status": "ok", "bot": "ZORA Ai Agent"})
+
+
+@app.route("/widget.js", methods=["GET"])
+def serve_widget():
+    """Serve the chat widget JavaScript with CORS headers."""
+    widget_path = os.path.join(BASE_DIR, "static", "zora-widget.js")
+    try:
+        with open(widget_path, "r", encoding="utf-8") as f:
+            js_content = f.read()
+        resp = make_response(js_content)
+        resp.headers['Content-Type'] = 'application/javascript; charset=utf-8'
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        resp.headers['Cache-Control'] = 'public, max-age=300, must-revalidate'
+        return resp
+    except Exception as e:
+        logger.error(f"Error serving widget: {e}")
+        return "// Widget not found", 404
 
 
 @app.route("/webhook", methods=["GET"])
@@ -906,6 +946,72 @@ def handle_postback(sender_id, payload):
             sender_id,
             "🛒 အော်ဒါမှာယူခြင်း\n━━━━━━━━━━━━━━━\n\n" + ORDER_STEPS["awaiting_name"]
         )
+
+
+# ---------------------------------------------------------------------------
+# Web Chat API Endpoint (for website widget)
+# ---------------------------------------------------------------------------
+@app.route("/web-chat", methods=["POST", "OPTIONS"])
+def web_chat():
+    """API endpoint for the website chat widget.
+    
+    Accepts POST with JSON: {"message": "...", "session_id": "..."}
+    Returns JSON: {"responses": [...], "session_id": "..."}
+    """
+    origin = request.headers.get('Origin', '')
+    
+    # Handle CORS preflight
+    if request.method == "OPTIONS":
+        resp = make_response('', 204)
+        return add_cors_headers(resp, origin)
+    
+    data = request.get_json()
+    if not data or "message" not in data:
+        resp = jsonify({"error": "Missing 'message' field"})
+        return add_cors_headers(resp, origin), 400
+    
+    message = data["message"].strip()
+    session_id = data.get("session_id", f"web_{uuid.uuid4().hex[:12]}")
+    
+    # Prefix web sessions to avoid collision with Messenger sessions
+    web_session_id = f"web_{session_id}" if not session_id.startswith("web_") else session_id
+    
+    if not message:
+        resp = jsonify({"error": "Empty message"})
+        return add_cors_headers(resp, origin), 400
+    
+    logger.info(f"Web chat [{web_session_id}]: {message}")
+    
+    # Process message using the same logic as Messenger
+    responses = process_message(web_session_id, message)
+    
+    resp = jsonify({
+        "responses": responses,
+        "session_id": session_id,
+        "intent": detect_intent(message)
+    })
+    return add_cors_headers(resp, origin)
+
+
+@app.route("/web-chat/greeting", methods=["GET", "OPTIONS"])
+def web_chat_greeting():
+    """Return the greeting message for the web chat widget."""
+    origin = request.headers.get('Origin', '')
+    
+    if request.method == "OPTIONS":
+        resp = make_response('', 204)
+        return add_cors_headers(resp, origin)
+    
+    resp = jsonify({
+        "greeting": GREETING_MESSAGE,
+        "quick_actions": [
+            {"label": "\ud83d\udcf1 \u1016\u102f\u1014\u103a\u1038\u1005\u103b\u1031\u1038\u1014\u103e\u102f\u1014\u103a\u1038", "message": "\u1016\u102f\u1014\u103a\u1038\u1005\u103b\u1031\u1038\u1014\u103e\u102f\u1014\u103a\u1038"},
+            {"label": "\ud83c\udfe0 \u1006\u102d\u102f\u1004\u103a\u1010\u100a\u103a\u1014\u1031\u101b\u102c", "message": "\u1006\u102d\u102f\u1004\u103a"},
+            {"label": "\ud83d\uded2 \u1021\u1031\u102c\u103a\u1012\u102b\u1019\u103e\u102c\u1019\u101a\u103a", "message": "\u1019\u103e\u102c\u1019\u101a\u103a"},
+            {"label": "\ud83c\udfac YouTube", "message": "review video"}
+        ]
+    })
+    return add_cors_headers(resp, origin)
 
 
 # ---------------------------------------------------------------------------
