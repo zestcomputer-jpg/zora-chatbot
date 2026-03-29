@@ -63,6 +63,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Cache configuration
 CACHE_TTL = 600  # 10 minutes in seconds
 API_BASE = "https://zestmobileshop.com/api/trpc/phones.search"
+API_LIST = "https://zestmobileshop.com/api/trpc/phones.list"
 
 # Cache state
 cache_lock = Lock()
@@ -98,26 +99,36 @@ def fetch_phones_from_api(page=1, page_size=100):
         return []
 
 def fetch_all_phones_from_api():
-    """Fetch all phones from the API with pagination."""
-    all_phones = []
-    page = 1
-    max_pages = 10  # Safety limit
-    
-    while page <= max_pages:
-        try:
-            phones = fetch_phones_from_api(page=page, page_size=100)
-            if not phones:
+    """Fetch all phones using the phones.list endpoint (richer data)."""
+    try:
+        params = {
+            "batch": "1",
+            "input": json.dumps({"0": {"json": None}})
+        }
+        resp = requests.get(API_LIST, params=params, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+        all_phones = data[0]["result"]["data"]["json"]
+        logger.info(f"Fetched {len(all_phones)} phones from phones.list API")
+    except Exception as e:
+        logger.error(f"phones.list failed, falling back to paginated search: {e}")
+        # Fallback to paginated search
+        all_phones = []
+        page = 1
+        while page <= 10:
+            try:
+                phones = fetch_phones_from_api(page=page, page_size=100)
+                if not phones:
+                    break
+                all_phones.extend(phones)
+                if len(phones) < 100:
+                    break
+                page += 1
+            except Exception as e2:
+                logger.error(f"Error fetching page {page}: {e2}")
                 break
-            all_phones.extend(phones)
-            logger.info(f"Fetched page {page}: {len(phones)} phones (total: {len(all_phones)})")
-            if len(phones) < 100:
-                break
-            page += 1
-        except Exception as e:
-            logger.error(f"Error fetching page {page}: {e}")
-            break
     
-    # Extract relevant fields
+    # Extract relevant fields including new ones
     catalog = []
     for p in all_phones:
         catalog.append({
@@ -129,6 +140,12 @@ def fetch_all_phones_from_api():
             "price": p.get("price", ""),
             "stock": p.get("stock", ""),
             "tag": p.get("tag", ""),
+            "gsmArenaUrl": p.get("gsmArenaUrl", ""),
+            "priceChange": p.get("priceChange", "stable"),
+            "showInPriceList": p.get("showInPriceList", True),
+            "showInCatalog": p.get("showInCatalog", True),
+            "youtubeReviewUrl": p.get("youtubeReviewUrl", ""),
+            "img": p.get("img", ""),
         })
     
     return catalog
@@ -177,6 +194,25 @@ try:
 except Exception as e:
     logger.warning(f"Could not load YouTube videos: {e}")
     YOUTUBE_VIDEOS = []
+
+# Load Research Tools
+RESEARCH_TOOLS = []
+try:
+    with open(os.path.join(BASE_DIR, "data", "research_tools.json"), "r", encoding="utf-8") as f:
+        RESEARCH_TOOLS = json.load(f)
+    logger.info(f"Loaded {len(RESEARCH_TOOLS)} research tools")
+except Exception as e:
+    logger.warning(f"Could not load research tools: {e}")
+    RESEARCH_TOOLS = [
+        {"name": "GSMArena Phone Comparison", "name_my": "GSMArena \u1016\u102f\u1014\u103a\u1038\u1014\u103e\u102d\u102f\u1004\u103a\u1038\u101a\u103e\u1025\u103a", "url": "https://www.gsmarena.com/compare.php3?idPhone1=14507"},
+        {"name": "NanoReview SOC Compare", "name_my": "NanoReview SOC \u1014\u103e\u102d\u102f\u1004\u103a\u1038\u101a\u103e\u1025\u103a", "url": "https://nanoreview.net/en/soc-compare"},
+        {"name": "NanoReview SOC Ranking", "name_my": "NanoReview SOC \u1021\u1006\u1004\u103a\u1037\u101e\u1010\u103a\u1019\u103e\u1010\u103a\u1001\u103b\u1000\u103a", "url": "https://nanoreview.net/en/soc-list/rating"},
+        {"name": "NanoReview Battery Endurance", "name_my": "NanoReview \u1018\u1000\u103a\u1011\u101b\u102e \u1021\u1006\u1004\u103a\u1037", "url": "https://nanoreview.net/en/phone-list/endurance-rating"},
+        {"name": "DXOMark Camera Ranking", "name_my": "DXOMark \u1000\u1004\u103a\u1019\u101b\u102c \u1021\u1006\u1004\u103a\u1037", "url": "https://www.dxomark.com/smartphones/"},
+        {"name": "AnTuTu Performance Ranking", "name_my": "AnTuTu Performance \u1021\u1006\u1004\u103a\u1037", "url": "https://www.antutu.com/web/ranking"},
+        {"name": "Geekbench 6 Android Benchmarks", "name_my": "Geekbench 6 Android Benchmarks", "url": "https://browser.geekbench.com/android-benchmarks"},
+        {"name": "Kimovil Phone Comparison", "name_my": "Kimovil \u1016\u102f\u1014\u103a\u1038\u1014\u103e\u102d\u102f\u1004\u103a\u1038\u101a\u103e\u1025\u103a", "url": "https://www.kimovil.com/en/compare"},
+    ]
 
 # Initialize cache on startup
 logger.info("Initializing phone catalog cache on startup...")
@@ -319,6 +355,16 @@ def format_stock_status(stock):
     return status_map.get(stock, "❓ မသိရှိပါ")
 
 
+def format_price_change(change):
+    """Format price change indicator."""
+    indicators = {
+        "up": "📈 ဈေးတက်",
+        "down": "📉 ဈေးကျ",
+        "stable": "➡️ ဈေးတည်ငြိမ်",
+    }
+    return indicators.get(change, "")
+
+
 def format_phone_result(phone):
     """Format a single phone result for display."""
     name = phone["name"]
@@ -327,6 +373,8 @@ def format_phone_result(phone):
     stock = format_stock_status(phone["stock"])
     storage = phone.get("storage", "")
     colors = phone.get("colors", "")
+    gsm_url = phone.get("gsmArenaUrl", "")
+    price_change = phone.get("priceChange", "")
 
     msg = f"📱 {brand} {name}\n"
     msg += f"💰 ဈေးနှုန်း - {price}\n"
@@ -335,6 +383,10 @@ def format_phone_result(phone):
     if colors:
         msg += f"🎨 အရောင် - {colors}\n"
     msg += f"📊 အခြေအနေ - {stock}\n"
+    if price_change and price_change != "stable":
+        msg += f"{format_price_change(price_change)}\n"
+    if gsm_url and gsm_url.startswith("http"):
+        msg += f"🔗 Specs - {gsm_url}\n"
     return msg
 
 
@@ -352,6 +404,162 @@ def format_phone_results(phones):
     msg += "━━━━━━━━━━━━━━━\n"
     msg += "📞 ဈေးနှုန်းများ ပြောင်းလဲနိုင်ပါသည်။\nအတည်ပြုရန် 09 797 8855 85 သို့ ဆက်သွယ်ပါ။\n"
     msg += "\n💡 မှာယူလိုပါက \"order\" သို့မဟုတ် \"မှာမယ်\" ဟု ရိုက်ထည့်ပါ။"
+    return msg
+
+
+# ---------------------------------------------------------------------------
+# Price List Features
+# ---------------------------------------------------------------------------
+def get_price_list_brands():
+    """Get available brands from the price list."""
+    catalog = get_phone_catalog()
+    brands = sorted(set(p["brand"] for p in catalog if p.get("showInPriceList")))
+    return brands
+
+
+def get_price_list_by_brand(brand, page=1, page_size=10):
+    """Get price list filtered by brand with pagination."""
+    catalog = get_phone_catalog()
+    # Filter by brand
+    if brand.lower() == "all":
+        filtered = [p for p in catalog if p.get("showInPriceList")]
+    else:
+        filtered = [p for p in catalog if p.get("showInPriceList") and p["brand"].lower() == brand.lower()]
+    
+    total = len(filtered)
+    total_pages = max(1, (total + page_size - 1) // page_size)
+    page = max(1, min(page, total_pages))
+    start = (page - 1) * page_size
+    end = start + page_size
+    items = filtered[start:end]
+    
+    return {
+        "items": items,
+        "total": total,
+        "page": page,
+        "total_pages": total_pages,
+        "brand": brand
+    }
+
+
+def format_price_list(data):
+    """Format price list for display."""
+    brand = data["brand"]
+    items = data["items"]
+    total = data["total"]
+    page = data["page"]
+    total_pages = data["total_pages"]
+    
+    if not items:
+        return f"❌ {brand} brand ဖြင့် ဖုန်းရှာမတွေ့ပါ။"
+    
+    brand_label = brand if brand.lower() != "all" else "အားလုံး"
+    msg = f"📋 ဈေးနှုန်းစာရင်း - {brand_label}\n"
+    msg += f"━━━━━━━━━━━━━━━\n"
+    msg += f"စုစုပေါင်း {total} မျိုး | စာမျက်နှာ {page}/{total_pages}\n\n"
+    
+    for i, phone in enumerate(items, (page - 1) * 10 + 1):
+        change_icon = ""
+        pc = phone.get("priceChange", "stable")
+        if pc == "up":
+            change_icon = " 📈"
+        elif pc == "down":
+            change_icon = " 📉"
+        
+        msg += f"{i}. {phone['brand']} {phone['name']}\n"
+        msg += f"   💰 {phone['price']}{change_icon}\n\n"
+    
+    msg += "━━━━━━━━━━━━━━━\n"
+    
+    if total_pages > 1:
+        if page < total_pages:
+            next_cmd = f"pricelist {brand} {page + 1}" if brand.lower() != "all" else f"pricelist all {page + 1}"
+            msg += f"📄 နောက်စာမျက်နှာ ကြည့်ရန် \"{next_cmd}\" ရိုက်ပါ\n"
+        if page > 1:
+            prev_cmd = f"pricelist {brand} {page - 1}" if brand.lower() != "all" else f"pricelist all {page - 1}"
+            msg += f"📄 ယခင်စာမျက်နှာ ကြည့်ရန် \"{prev_cmd}\" ရိုက်ပါ\n"
+    
+    msg += "\n⚠️ အချိန်နှင့်အမျှ အပြောင်းအလဲရှိနိုင်ပါသဖြင့် ဖုန်းဖြင့် တိုက်ရိုက် ဆက်သွယ်စုံစမ်းနိုင်ပါသည်။\n"
+    msg += "📞 09 797 8855 85\n"
+    msg += "🌐 https://zestmobileshop.com/price-list"
+    return msg
+
+
+def format_price_list_brands():
+    """Format the list of available brands."""
+    brands = get_price_list_brands()
+    msg = "📋 ဈေးနှုန်းစာရင်း - ရရှိနိုင်သော Brand များ\n"
+    msg += "━━━━━━━━━━━━━━━\n\n"
+    
+    for i, brand in enumerate(brands, 1):
+        count = len([p for p in get_phone_catalog() if p.get("showInPriceList") and p["brand"] == brand])
+        msg += f"{i}. {brand} ({count} မျိုး)\n"
+    
+    msg += "\n━━━━━━━━━━━━━━━\n"
+    msg += "💡 Brand တစ်ခု၏ ဈေးနှုန်းစာရင်း ကြည့်ရန်:\n"
+    msg += "   \"pricelist iPhone\" သို့မဟုတ် \"pricelist Samsung\"\n"
+    msg += "   \"pricelist all\" - အားလုံးကြည့်ရန်\n\n"
+    msg += "🌐 https://zestmobileshop.com/price-list"
+    return msg
+
+
+# ---------------------------------------------------------------------------
+# Research Tools
+# ---------------------------------------------------------------------------
+def format_research_tools():
+    """Format research tools list."""
+    msg = "🔬 Research Tools - ဖုန်းသုတေသန ကိရိယာများ\n"
+    msg += "━━━━━━━━━━━━━━━\n\n"
+    
+    for i, tool in enumerate(RESEARCH_TOOLS, 1):
+        name_my = tool.get("name_my", tool["name"])
+        desc_my = tool.get("description_my", tool.get("description", ""))
+        msg += f"{i}. {name_my}\n"
+        if desc_my:
+            msg += f"   {desc_my}\n"
+        msg += f"   🔗 {tool['url']}\n\n"
+    
+    msg += "━━━━━━━━━━━━━━━\n"
+    msg += "💡 ဖုန်းတစ်လုံး၏ specs ကြည့်ရန် \"specs iPhone 16\" ရိုက်ပါ\n"
+    msg += "🌐 https://zestmobileshop.com"
+    return msg
+
+
+def get_phone_specs_link(query):
+    """Find GSMArena specs link for a specific phone."""
+    phones = search_phones(query)
+    if not phones:
+        return None
+    
+    results = []
+    for phone in phones[:3]:
+        gsm_url = phone.get("gsmArenaUrl", "")
+        if gsm_url and gsm_url.startswith("http"):
+            results.append({
+                "name": f"{phone['brand']} {phone['name']}",
+                "price": phone['price'],
+                "url": gsm_url
+            })
+    return results
+
+
+def format_specs_results(results, query):
+    """Format specs lookup results."""
+    if not results:
+        return (f"❌ \"{query}\" အတွက် specs link ရှာမတွေ့ပါ။\n\n"
+                f"🔍 GSMArena တွင် တိုက်ရိုက်ရှာရန်:\n"
+                f"🔗 https://www.gsmarena.com/results.php3?sQuickSearch=yes&sName={query.replace(' ', '+')}")
+    
+    msg = f"🔬 \"{query}\" Specs & Details\n"
+    msg += "━━━━━━━━━━━━━━━\n\n"
+    
+    for i, r in enumerate(results, 1):
+        msg += f"{i}. 📱 {r['name']}\n"
+        msg += f"   💰 {r['price']}\n"
+        msg += f"   🔗 {r['url']}\n\n"
+    
+    msg += "━━━━━━━━━━━━━━━\n"
+    msg += "💡 အခြား Research Tools ကြည့်ရန် \"research tools\" ရိုက်ပါ"
     return msg
 
 
@@ -436,6 +644,25 @@ VIDEO_KEYWORDS = [
     "ဘက်ထရီ", "အားထုတ်", "ကြည့်", "ဖွင့်", "unbox"
 ]
 
+PRICELIST_KEYWORDS = [
+    "price list", "pricelist", "ဈေးနှုန်းစာရင်း", "စာရင်း",
+    "ဈေးစာရင်း", "စျေးစာရင်း", "စျေးနှုန်းစာရင်း",
+    "brand list", "all prices", "ဈေးအားလုံး"
+]
+
+RESEARCH_KEYWORDS = [
+    "research", "tools", "compare", "comparison", "benchmark",
+    "gsmarena", "nanoreview", "dxomark", "antutu", "geekbench", "kimovil",
+    "soc", "chip", "processor", "cpu", "gpu",
+    "research tools", "သုတေသန", "ကိရိယာ",
+    "နှိုင်းယှဉ်", "စစ်ဆေး"
+]
+
+SPECS_KEYWORDS = [
+    "specs", "spec", "specification", "detail",
+    "အသေးစိတ်", "သတ်မှတ်ချက်"
+]
+
 CANCEL_KEYWORDS = [
     "cancel", "stop", "ပယ်ဖျက်", "ရပ်", "မလိုတော့", "ပြန်",
     "back", "exit", "quit"
@@ -458,6 +685,26 @@ def detect_intent(text):
     # Check for thanks
     if any(kw in text_lower for kw in THANKS_KEYWORDS) and len(text_lower) < 30:
         return "thanks"
+
+    # Check for pricelist command (e.g., "pricelist iPhone", "pricelist all 2")
+    if text_lower.startswith("pricelist ") or text_lower == "pricelist":
+        return "pricelist_browse"
+
+    # Check for specs command (e.g., "specs iPhone 16")
+    if text_lower.startswith("specs "):
+        return "specs"
+
+    # Check for price list intent
+    if any(kw in text_lower for kw in PRICELIST_KEYWORDS):
+        return "pricelist"
+
+    # Check for research tools intent
+    if any(kw in text_lower for kw in RESEARCH_KEYWORDS):
+        return "research"
+
+    # Check for specs intent
+    if any(kw in text_lower for kw in SPECS_KEYWORDS):
+        return "specs"
 
     # Check for order intent
     if any(kw in text_lower for kw in ORDER_KEYWORDS):
@@ -538,9 +785,40 @@ def process_message(sender_id, text):
         responses.append(GREETING_MESSAGE)
         responses.append("💡 အောက်ပါတို့ကို လုပ်ဆောင်နိုင်ပါတယ်:\n\n"
                          "📱 ဖုန်းအမည်/Brand ရိုက်ထည့်ပြီး ဈေးနှုန်းစစ်ဆေးပါ\n"
-                         "🏪 \"ဆိုင်\" ဟုရိုက်ပြီး ဆိုင်တည်နေရာ ကြည့်ပါ\n"
-                         "🛒 \"မှာမယ်\" ဟုရိုက်ပြီး အော်ဒါမှာယူပါ\n"
-                         "🎬 \"review\" + ဖုန်းအမည် ရိုက်ပြီး ဗီဒီယို ကြည့်ပါ")
+                         "📋 \"ဈေးနှုန်းစာရင်း\" - နေ့စဥ် ဈေးနှုန်းစာရင်း ကြည့်ရန်\n"
+                         "🔬 \"research tools\" - ဖုန်းသုတေသန ကိရိယာများ\n"
+                         "🏠 \"ဆိုင်\" - ဆိုင်တည်နေရာ\n"
+                         "🛒 \"မှာမယ်\" - အော်ဒါမှာယူ\n"
+                         "🎬 \"review\" + ဖုန်းအမည် - ဗီဒီယို ကြည့်ရန်")
+
+    elif intent == "pricelist":
+        responses.append(format_price_list_brands())
+
+    elif intent == "pricelist_browse":
+        # Parse "pricelist <brand> <page>"
+        parts = text.strip().split()
+        brand = "all"
+        page = 1
+        if len(parts) >= 2:
+            brand = parts[1]
+        if len(parts) >= 3:
+            try:
+                page = int(parts[2])
+            except ValueError:
+                page = 1
+        data = get_price_list_by_brand(brand, page)
+        responses.append(format_price_list(data))
+
+    elif intent == "research":
+        responses.append(format_research_tools())
+
+    elif intent == "specs":
+        # Extract phone name from "specs <phone>" or general specs query
+        query = text.strip()
+        if query.lower().startswith("specs "):
+            query = query[6:].strip()
+        results = get_phone_specs_link(query)
+        responses.append(format_specs_results(results, query))
 
     elif intent == "store":
         responses.append(STORE_INFO)
@@ -779,23 +1057,23 @@ def setup_messenger_profile():
                     },
                     {
                         "type": "postback",
-                        "title": "🏪 ဆိုင်တည်နေရာ",
+                        "title": "📋 ဈေးနှုန်းစာရင်း",
+                        "payload": "PRICE_LIST"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "🔬 Research Tools",
+                        "payload": "RESEARCH_TOOLS"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "🏠 ဆိုင်တည်နေရာ",
                         "payload": "STORE_LOCATION"
                     },
                     {
                         "type": "postback",
                         "title": "🛒 အော်ဒါမှာယူမယ်",
                         "payload": "ORDER"
-                    },
-                    {
-                        "type": "web_url",
-                        "title": "🌐 Website",
-                        "url": "https://zestmobileshop.com"
-                    },
-                    {
-                        "type": "web_url",
-                        "title": "🎬 YouTube Channel",
-                        "url": "https://www.youtube.com/channel/UClZasg2VGtrRxklU_uWFcFQ"
                     }
                 ]
             }
@@ -819,7 +1097,7 @@ def index():
         "name": "ZORA Ai Agent",
         "description": "Facebook Messenger Chatbot for ZEST Mobile Shop",
         "status": "running",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "endpoints": {
             "webhook": "/webhook",
             "health": "/health",
@@ -936,6 +1214,10 @@ def handle_postback(sender_id, payload):
             "• Tecno\n"
             "• Infinix"
         )
+    elif payload == "PRICE_LIST":
+        send_message(sender_id, format_price_list_brands())
+    elif payload == "RESEARCH_TOOLS":
+        send_message(sender_id, format_research_tools())
     elif payload == "STORE_LOCATION":
         send_message(sender_id, STORE_INFO)
     elif payload == "ORDER":
@@ -1005,10 +1287,12 @@ def web_chat_greeting():
     resp = jsonify({
         "greeting": GREETING_MESSAGE,
         "quick_actions": [
-            {"label": "\ud83d\udcf1 \u1016\u102f\u1014\u103a\u1038\u1005\u103b\u1031\u1038\u1014\u103e\u102f\u1014\u103a\u1038", "message": "\u1016\u102f\u1014\u103a\u1038\u1005\u103b\u1031\u1038\u1014\u103e\u102f\u1014\u103a\u1038"},
-            {"label": "\ud83c\udfe0 \u1006\u102d\u102f\u1004\u103a\u1010\u100a\u103a\u1014\u1031\u101b\u102c", "message": "\u1006\u102d\u102f\u1004\u103a"},
-            {"label": "\ud83d\uded2 \u1021\u1031\u102c\u103a\u1012\u102b\u1019\u103e\u102c\u1019\u101a\u103a", "message": "\u1019\u103e\u102c\u1019\u101a\u103a"},
-            {"label": "\ud83c\udfac YouTube", "message": "review video"}
+            {"label": "📱 ဖုန်းစျေးနှုန်း", "message": "ဖုန်းစျေးနှုန်း"},
+            {"label": "📋 ဈေးနှုန်းစာရင်း", "message": "ဈေးနှုန်းစာရင်း"},
+            {"label": "🔬 Research Tools", "message": "research tools"},
+            {"label": "🏠 ဆိုင်တည်နေရာ", "message": "ဆိုင်"},
+            {"label": "🛒 အော်ဒါမှာမယ်", "message": "မှာမယ်"},
+            {"label": "🎬 YouTube", "message": "review video"}
         ]
     })
     return add_cors_headers(resp, origin)

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Daily Price List",
+    "name_my": "နေ့စဥ် ဈေးနှုန်းစာရင်း",
+    "description": "View today's latest phone prices. Updated regularly.",
+    "description_my": "ယနေ့ နောက်ဆုံးရ ဖုန်းဈေးနှုန်းများကို ကြည့်ရှုပါ။",
+    "url": "https://zestmobileshop.com/price-list"
+  },
+  {
+    "name": "GSMArena Phone Comparison",
+    "name_my": "GSMArena ဖုန်းနှိုင်းယှဉ်",
+    "description": "Compare specs of 2 or more phones side by side on GSMArena.",
+    "description_my": "GSMArena တွင် ဖုန်း ၂ လုံး သို့မဟုတ် ထို့ထက်ပိုသော ဖုန်းများ၏ specs များကို ယှဉ်ကြည့်ပါ။",
+    "url": "https://www.gsmarena.com/compare.php3?idPhone1=14507"
+  },
+  {
+    "name": "NanoReview SOC Compare",
+    "name_my": "NanoReview SOC နှိုင်းယှဉ်",
+    "description": "Compare Snapdragon, Dimensity, Exynos chip performance side by side.",
+    "description_my": "Snapdragon, Dimensity, Exynos chip များ၏ performance ကို ယှဉ်ကြည့်ပါ။",
+    "url": "https://nanoreview.net/en/soc-compare"
+  },
+  {
+    "name": "NanoReview SOC Ranking",
+    "name_my": "NanoReview SOC အဆင့်သတ်မှတ်ချက်",
+    "description": "Full SOC ranking list — see which chip is the best overall.",
+    "description_my": "SOC အဆင့်သတ်မှတ်ချက် စာရင်း — အကောင်းဆုံး chip ကို ကြည့်ပါ။",
+    "url": "https://nanoreview.net/en/soc-list/rating"
+  },
+  {
+    "name": "NanoReview Battery Endurance",
+    "name_my": "NanoReview ဘက်ထရီ အဆင့်",
+    "description": "Check which smartphones have the best battery life and endurance rating.",
+    "description_my": "ဘက်ထရီ အသက်တာ အကောင်းဆုံး ဖုန်းများကို စစ်ဆေးပါ။",
+    "url": "https://nanoreview.net/en/phone-list/endurance-rating"
+  },
+  {
+    "name": "DXOMark Camera Ranking",
+    "name_my": "DXOMark ကင်မရာ အဆင့်",
+    "description": "World's most trusted camera benchmark — see which phone takes the best photos.",
+    "description_my": "ကမ္ဘာ့ အယုံကြည်ရဆုံး ကင်မရာ benchmark — အကောင်းဆုံး ဓာတ်ပုံရိုက်နိုင်သော ဖုန်းကို ကြည့်ပါ။",
+    "url": "https://www.dxomark.com/smartphones/"
+  },
+  {
+    "name": "AnTuTu Performance Ranking",
+    "name_my": "AnTuTu Performance အဆင့်",
+    "description": "Check AnTuTu benchmark scores to find the fastest performing smartphones.",
+    "description_my": "AnTuTu benchmark scores ဖြင့် အမြန်ဆုံး ဖုန်းများကို ရှာပါ။",
+    "url": "https://www.antutu.com/web/ranking"
+  },
+  {
+    "name": "Geekbench 6 Android Benchmarks",
+    "name_my": "Geekbench 6 Android Benchmarks",
+    "description": "Check Geekbench 6 CPU/GPU scores for all Android phones ranked by real-world performance.",
+    "description_my": "Geekbench 6 CPU/GPU scores ဖြင့် Android ဖုန်းများ၏ performance ကို ကြည့်ပါ။",
+    "url": "https://browser.geekbench.com/android-benchmarks"
+  },
+  {
+    "name": "Kimovil Phone Comparison",
+    "name_my": "Kimovil ဖုန်းနှိုင်းယှဉ်",
+    "description": "Compare smartphones side-by-side with detailed specs, prices, and scores on Kimovil.",
+    "description_my": "Kimovil တွင် ဖုန်းများ၏ specs, ဈေးနှုန်းနှင့် scores များကို ယှဉ်ကြည့်ပါ။",
+    "url": "https://www.kimovil.com/en/compare"
+  }
+]
