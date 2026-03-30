@@ -150,39 +150,58 @@ def fetch_all_phones_from_api():
     
     return catalog
 
+def _refresh_cache_background():
+    """Refresh phone catalog cache in a background thread (non-blocking)."""
+    def _do_refresh():
+        phones = fetch_all_phones_from_api()
+        if phones:
+            with cache_lock:
+                cache_data["phones"] = phones
+                cache_data["timestamp"] = time.time()
+            logger.info(f"Background cache refresh: updated with {len(phones)} phones")
+        else:
+            logger.warning("Background cache refresh: API returned no phones")
+    t = Thread(target=_do_refresh, daemon=True)
+    t.start()
+
+
 def get_phone_catalog():
-    """Get phone catalog with intelligent caching.
+    """Get phone catalog with stale-while-revalidate caching.
     
-    Returns cached data if fresh (< 10 minutes old).
-    Otherwise fetches fresh data from the API.
+    - If cache is fresh (< 10 min): return immediately.
+    - If cache is stale but exists: return stale data instantly AND trigger
+      a background refresh so the NEXT request gets fresh data.
+    - If cache is empty: block and fetch (first cold start only).
+    This ensures users NEVER wait for an API call during normal operation.
     """
     global cache_data
     
     current_time = time.time()
     cache_age = current_time - cache_data["timestamp"]
     
-    # Return cached data if still fresh
+    # Cache is fresh — return immediately
     if cache_data["phones"] and cache_age < CACHE_TTL:
-        logger.info(f"Using cached phone catalog (age: {cache_age:.0f}s)")
         return cache_data["phones"]
     
-    # Fetch fresh data from API
-    logger.info("Fetching fresh phone catalog from API...")
+    # Cache is stale but we have data — return stale instantly, refresh in background
+    if cache_data["phones"] and cache_age >= CACHE_TTL:
+        logger.info(f"Cache stale ({cache_age:.0f}s), serving stale data and refreshing in background")
+        _refresh_cache_background()
+        return cache_data["phones"]
+    
+    # Cache is empty (first cold start) — must block and fetch
+    logger.info("Cache empty, fetching phone catalog from API (cold start)...")
     with cache_lock:
         # Double-check after acquiring lock
-        cache_age = time.time() - cache_data["timestamp"]
-        if cache_data["phones"] and cache_age < CACHE_TTL:
+        if cache_data["phones"]:
             return cache_data["phones"]
-        
-        # Fetch new data
         phones = fetch_all_phones_from_api()
         if phones:
             cache_data["phones"] = phones
             cache_data["timestamp"] = time.time()
-            logger.info(f"Updated cache with {len(phones)} phones")
+            logger.info(f"Cold start cache loaded with {len(phones)} phones")
         else:
-            logger.warning("API returned no phones, using existing cache")
-        
+            logger.warning("API returned no phones on cold start")
         return cache_data["phones"]
 
 # Load YouTube videos (static, doesn't change often)
@@ -486,13 +505,21 @@ def format_price_list(data):
 
 
 def format_price_list_brands():
-    """Format the list of available brands."""
-    brands = get_price_list_brands()
-    msg = "📋 ဈေးနှုန်းစာရင်း - ရရှိနိုင်သော Brand များ\n"
+    """Format the list of available brands (single catalog fetch)."""
+    catalog = get_phone_catalog()  # Only one fetch
+    # Build brand -> count map in one pass
+    brand_counts = {}
+    for p in catalog:
+        if p.get("showInPriceList"):
+            b = p["brand"]
+            brand_counts[b] = brand_counts.get(b, 0) + 1
+    brands = sorted(brand_counts.keys())
+
+    msg = "📋 ဈေးနှုန်းစာရင်း - ရရှိုန်းနိုင်း Brand များ\n"
     msg += "━━━━━━━━━━━━━━━\n\n"
     
     for i, brand in enumerate(brands, 1):
-        count = len([p for p in get_phone_catalog() if p.get("showInPriceList") and p["brand"] == brand])
+        count = brand_counts[brand]
         msg += f"{i}. {brand} ({count} မျိုး)\n"
     
     msg += "\n━━━━━━━━━━━━━━━\n"
@@ -1090,6 +1117,12 @@ def setup_messenger_profile():
 # ---------------------------------------------------------------------------
 # Webhook Routes
 # ---------------------------------------------------------------------------
+@app.route("/ping", methods=["GET", "HEAD"])
+def ping():
+    """Ultra-lightweight ping endpoint for keep-alive monitors (no DB, no cache)."""
+    return "pong", 200
+
+
 @app.route("/", methods=["GET"])
 def index():
     """Health check / landing page."""
@@ -1097,13 +1130,16 @@ def index():
         "name": "ZORA Ai Agent",
         "description": "Facebook Messenger Chatbot for ZEST Mobile Shop",
         "status": "running",
-        "version": "2.0.0",
+        "version": "3.0.0",
         "endpoints": {
             "webhook": "/webhook",
             "health": "/health",
+            "ping": "/ping",
             "test": "/test?q=<phone_model>",
             "web_chat": "/web-chat",
-            "web_chat_greeting": "/web-chat/greeting"
+            "web_chat_greeting": "/web-chat/greeting",
+            "widget": "/widget.js",
+            "setup": "/setup"
         }
     })
 
@@ -1337,24 +1373,36 @@ def keep_alive_worker():
     """Background thread that pings the server to keep it awake.
     
     Render's free tier puts apps to sleep after 15 minutes of inactivity.
-    This pings the health endpoint every 12 minutes to keep the app alive.
+    This pings the health endpoint every 10 minutes to keep the app alive.
+    We also use an external UptimeRobot-style approach: ping our own public URL.
     """
     global keep_alive_enabled
     
-    # Get the server URL from environment or use localhost for testing
-    server_url = os.environ.get("SERVER_URL", "http://localhost:5000")
+    # Use the public Render URL if available, otherwise localhost
+    server_url = os.environ.get("SERVER_URL", "")
+    if not server_url:
+        # Auto-detect from RENDER_EXTERNAL_URL (Render sets this automatically)
+        server_url = os.environ.get("RENDER_EXTERNAL_URL", "http://localhost:5000")
     
-    logger.info(f"🔄 Keep-alive worker started. Will ping {server_url}/health every 12 minutes")
+    logger.info(f"🔄 Keep-alive worker started. Will ping {server_url}/health every 10 minutes")
+    
+    # Do an immediate first ping after 30 seconds to confirm the URL works
+    time.sleep(30)
+    try:
+        response = requests.get(f"{server_url}/ping", timeout=15)
+        logger.info(f"✅ Keep-alive initial ping: {response.status_code}")
+    except Exception as e:
+        logger.warning(f"⚠️ Keep-alive initial ping failed (will retry): {e}")
     
     while keep_alive_enabled:
         try:
-            time.sleep(720)  # Wait 12 minutes
+            time.sleep(600)  # Wait 10 minutes (well under Render's 15-min sleep threshold)
             if not keep_alive_enabled:
                 break
             
-            response = requests.get(f"{server_url}/health", timeout=10)
+            response = requests.get(f"{server_url}/ping", timeout=15)
             if response.status_code == 200:
-                logger.info(f"✅ Keep-alive ping successful at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+                logger.info(f"✅ Keep-alive ping OK at {time.strftime('%Y-%m-%d %H:%M:%S')}")
             else:
                 logger.warning(f"⚠️ Keep-alive ping returned status {response.status_code}")
         except Exception as e:
@@ -1384,6 +1432,19 @@ def setup():
 
 
 # ---------------------------------------------------------------------------
+# Module-level startup (runs in BOTH gunicorn workers AND direct python run)
+# ---------------------------------------------------------------------------
+def _on_startup():
+    """Called at module import time so Gunicorn workers also initialise properly."""
+    # Start keep-alive for Render / production (works with Gunicorn)
+    if os.environ.get("RENDER") == "true" or os.environ.get("ENVIRONMENT") == "production":
+        start_keep_alive()
+        logger.info("🚀 Keep-alive activated (Render/production mode)")
+
+_on_startup()
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
@@ -1396,10 +1457,6 @@ if __name__ == "__main__":
         setup_messenger_profile()
     else:
         logger.warning("⚠️ PAGE_ACCESS_TOKEN not set. Running in test mode.")
-    
-    # Start keep-alive mechanism for Render free tier
-    if os.environ.get("ENVIRONMENT") == "production" or os.environ.get("RENDER") == "true":
-        start_keep_alive()
-    
+
     # Use app.run() for development, gunicorn for production
     app.run(host="0.0.0.0", port=port, debug=False, threaded=True)
