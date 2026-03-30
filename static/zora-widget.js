@@ -28,13 +28,16 @@
     accentColor: '#00C853',
     greeting: 'မင်္ဂလာပါ ခင်ဗျာ လူကြီးမင်း သိရှိလိုသည့် ဈေးနှုန်း ဖုန်း အမျိုးအစားများကို မေးမြန်းထားပေးပါ။\nZORA Ai Agent မှ ဖြေကြားပေးထားပါမယ်။\nမနက် (၈)နာရီမှ ည (၈)နာရီအတွင်း ကျွန်တော်တို့ ZEST MOBILE မှ CB တွင်ဝင်ရောက်စစ်ဆေးသည့် အချိန်၌သိရှိလိုသည်များကို ပြန်လည်ဖြေကြားပေးပါမယ်ခင်ဗျာ။  09 7978855 85 သို့ဆက်သွယ်မေးမြန်နိုင်ပါတယ်။\nhttps://zestmobileshop.com မှာလဲဝင်ရောက်ကြည့်ရှုနိုင်ပါတယ်။',
     quickActions: [
-      { label: '📱 ဖုန်းစျေးနှုန်း', message: 'ဖုန်းစျေးနှုန်း' },
+      { label: '📱 ဖုန်းဈေးနှုန်း',   message: 'ဖုန်းဈေးနှုန်း' },
       { label: '📋 ဈေးနှုန်းစာရင်း', message: 'ဈေးနှုန်းစာရင်း' },
-      { label: '🔬 Research Tools', message: 'research tools' },
-      { label: '🏠 ဆိုင်တည်နေရာ', message: 'ဆိုင်' },
-      { label: '🛒 အော်ဒါမှာမယ်', message: 'မှာမယ်' },
-      { label: '🎬 YouTube', message: 'review video' }
-    ]
+      { label: '🔍 Specs ကြည့်မယ်',  message: 'specs ' },
+      { label: '🔬 Research Tools',   message: 'research tools' },
+      { label: '🏠 ဆိုင်တည်နေရာ',   message: 'ဆိုင်' },
+      { label: '🛒 အော်ဒါမှာမယ်',   message: 'မှာမယ်' },
+      { label: '🎬 Review ဗီဒီယို', message: 'review' },
+      { label: '📞 ဆက်သွယ်ရန်',     message: 'ဆက်သွယ်' }
+    ],
+    greetingReply: 'ဘာများကူညီရမလဲ ခင်ဗျာ? 🌟\nအောက်ပါ ခလုတ်များကို နှိပ်ပြီး လိုအပ်သည်ကို ရွေးချယ်နိုင်ပါတယ်။'
   };
 
   // Session management
@@ -513,9 +516,17 @@
         addMessage('တောင်းပန်ပါတယ် ခင်ဗျာ၊ ပြဿနာ ဖြစ်နေပါတယ်။ ခဏစောင့်ပြီး ထပ်ကြိုးစားပေးပါ။ 🙏', 'bot');
       }
 
-      // Show quick actions after certain intents
-      if (data.intent === 'greeting' || data.intent === 'thanks') {
-        setTimeout(() => addQuickActions(ZORA_CONFIG.quickActions), data.responses.length * 300 + 200);
+      // Show quick_replies from API if present (e.g. after greeting intent)
+      if (data.quick_replies && data.quick_replies.quick_replies) {
+        const qrs = data.quick_replies.quick_replies;
+        const delay = (data.responses ? data.responses.length : 0) * 300 + 200;
+        // Show the "ဘာများကူညီရမလဲ" text then the buttons
+        setTimeout(() => {
+          addMessage(data.quick_replies.text, 'bot');
+          setTimeout(() => addQuickActions(qrs), 300);
+        }, delay);
+      } else if (data.intent === 'thanks') {
+        setTimeout(() => addQuickActions(ZORA_CONFIG.quickActions), (data.responses ? data.responses.length : 0) * 300 + 200);
       }
 
     } catch (error) {
@@ -541,10 +552,13 @@
 
     if (isOpen && !hasGreeted) {
       hasGreeted = true;
-      // Show greeting
+      // Show greeting then "ဘာများကူညီရမလဲ" + shortcut buttons
       setTimeout(() => {
         addMessage(ZORA_CONFIG.greeting, 'bot');
-        setTimeout(() => addQuickActions(ZORA_CONFIG.quickActions), 400);
+        setTimeout(() => {
+          addMessage(ZORA_CONFIG.greetingReply, 'bot');
+          setTimeout(() => addQuickActions(ZORA_CONFIG.quickActions), 300);
+        }, 600);
       }, 300);
     }
 

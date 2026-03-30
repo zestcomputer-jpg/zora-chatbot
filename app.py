@@ -661,7 +661,8 @@ ORDER_KEYWORDS = [
 
 PRICE_KEYWORDS = [
     "price", "cost", "how much", "ဈေး", "ဈေးနှုန်း", "ဘယ်လောက်",
-    "စျေး", "စျေးနှုန်း", "ကျပ်", "သိန်း", "ks"
+    "စျေး", "စျေးနှုန်း", "ကျပ်", "သိန်း", "ks",
+    "ဖုန်းဈေးနှုန်း", "ဖုန်းစျေးနှုန်း"
 ]
 
 VIDEO_KEYWORDS = [
@@ -810,13 +811,21 @@ def process_message(sender_id, text):
 
     if intent == "greeting":
         responses.append(GREETING_MESSAGE)
-        responses.append("💡 အောက်ပါတို့ကို လုပ်ဆောင်နိုင်ပါတယ်:\n\n"
-                         "📱 ဖုန်းအမည်/Brand ရိုက်ထည့်ပြီး ဈေးနှုန်းစစ်ဆေးပါ\n"
-                         "📋 \"ဈေးနှုန်းစာရင်း\" - နေ့စဥ် ဈေးနှုန်းစာရင်း ကြည့်ရန်\n"
-                         "🔬 \"research tools\" - ဖုန်းသုတေသန ကိရိယာများ\n"
-                         "🏠 \"ဆိုင်\" - ဆိုင်တည်နေရာ\n"
-                         "🛒 \"မှာမယ်\" - အော်ဒါမှာယူ\n"
-                         "🎬 \"review\" + ဖုန်းအမည် - ဗီဒီယို ကြည့်ရန်")
+        # Special dict: web-chat renders as shortcut buttons; Messenger uses send_quick_replies
+        responses.append({
+            "__type": "quick_replies",
+            "text": "ဘာများကူညီရမလဲ ခင်ဗျာ? 🌟\nအောက်ပါ ခလုတ်များကို နှိပ်ပြီး လိုအပ်သည်ကို ရွေးချယ်နိုင်ပါတယ်။",
+            "quick_replies": [
+                {"label": "📱 ဖုန်းဈေးနှုန်း",    "message": "ဖုန်းဈေးနှုန်း"},
+                {"label": "📋 ဈေးနှုန်းစာရင်း",  "message": "ဈေးနှုန်းစာရင်း"},
+                {"label": "🔍 Specs ကြည့်မယ်",   "message": "specs "},
+                {"label": "🔬 Research Tools",    "message": "research tools"},
+                {"label": "🏠 ဆိုင်တည်နေရာ",    "message": "ဆိုင်"},
+                {"label": "🛒 အော်ဒါမှာမယ်",    "message": "မှာမယ်"},
+                {"label": "🎬 Review ဗီဒီယို",  "message": "review"},
+                {"label": "📞 ဆက်သွယ်ရန်",      "message": "ဆက်သွယ်"},
+            ]
+        })
 
     elif intent == "pricelist":
         responses.append(format_price_list_brands())
@@ -882,11 +891,27 @@ def process_message(sender_id, text):
                 )
 
     elif intent == "phone_search":
-        phones = search_phones(text)
-        responses.append(format_phone_results(phones))
+        # If the message is exactly the quick-reply label (no specific model), prompt for model name
+        generic_price_triggers = ["ဖုန်းဈေးနှုန်း", "ဖုန်းစျေးနှုန်း", "phone price", "price"]
+        if text.strip().lower() in [t.lower() for t in generic_price_triggers]:
+            responses.append(
+                "📱 ဖုန်းဈေးနှုန်း စစ်ဆေးရန်\n\n"
+                "ဖုန်းအမည် သိုမှုတ် Brand ကို ရိုက်ထည့်ပြီးပါ ခင်ဗျာ\u2193\n\n"
+                "ဥပမာ၊\n"
+                "\u2022 iPhone 16\n"
+                "\u2022 Samsung S25\n"
+                "\u2022 Redmi Note 15\n"
+                "\u2022 Tecno Spark 30\n"
+                "\u2022 Infinix Hot 50\n"
+                "\u2022 Vivo Y300\n\n"
+                "📋 ဖုန်းအမည်အအးကို \"ဈေးနှုန်းစာရင်း\" ကို မေးမြန်းပါခင်ဘဗျာ။"
+            )
+        else:
+            phones = search_phones(text)
+            responses.append(format_phone_results(phones))
 
-        # Also check for relevant videos
-        videos = find_relevant_videos(text, max_results=2)
+        # Also check for relevant videos (skip for generic triggers)
+        videos = [] if text.strip().lower() in [t.lower() for t in generic_price_triggers] else find_relevant_videos(text, max_results=2)
         if videos:
             video_msg = "\n🎬 ဆက်စပ် ဗီဒီယိုများ:\n"
             for v in videos:
@@ -1033,6 +1058,44 @@ def send_message(recipient_id, text):
                 logger.error(f"Send message failed: {resp.status_code} {resp.text}")
         except Exception as e:
             logger.error(f"Send message error: {e}")
+
+
+# Quick reply shortcuts shown after greeting
+GREETING_QUICK_REPLIES = [
+    {"content_type": "text", "title": "📱 ဖုန်းဈေးနှုန်း",     "payload": "QR_PHONE_PRICES"},
+    {"content_type": "text", "title": "📋 ဈေးနှုန်းစာရင်း",   "payload": "QR_PRICE_LIST"},
+    {"content_type": "text", "title": "🔍 Specs ကြည့်မယ်",    "payload": "QR_SPECS"},
+    {"content_type": "text", "title": "🔬 Research Tools",     "payload": "QR_RESEARCH"},
+    {"content_type": "text", "title": "🏠 ဆိုင်တည်နေရာ",     "payload": "QR_STORE"},
+    {"content_type": "text", "title": "🛒 အော်ဒါမှာမယ်",     "payload": "QR_ORDER"},
+    {"content_type": "text", "title": "🎬 Review ဗီဒီယို",   "payload": "QR_VIDEO"},
+    {"content_type": "text", "title": "📞 ဆက်သွယ်ရန်",       "payload": "QR_CONTACT"},
+]
+
+
+def send_quick_replies(recipient_id, text, quick_replies):
+    """Send a message with Facebook Messenger Quick Reply buttons."""
+    if not PAGE_ACCESS_TOKEN:
+        logger.warning("PAGE_ACCESS_TOKEN not set. Quick reply not sent.")
+        return
+
+    url = "https://graph.facebook.com/v19.0/me/messages"
+    headers = {"Content-Type": "application/json"}
+    params = {"access_token": PAGE_ACCESS_TOKEN}
+    payload = {
+        "recipient": {"id": recipient_id},
+        "messaging_type": "RESPONSE",
+        "message": {
+            "text": text,
+            "quick_replies": quick_replies[:13],  # Messenger allows max 13
+        },
+    }
+    try:
+        resp = requests.post(url, headers=headers, params=params, json=payload, timeout=10)
+        if resp.status_code != 200:
+            logger.error(f"Send quick replies failed: {resp.status_code} {resp.text}")
+    except Exception as e:
+        logger.error(f"Send quick replies error: {e}")
 
 
 def send_typing_indicator(recipient_id, action="typing_on"):
@@ -1213,7 +1276,14 @@ def webhook_handler():
                 # Process message
                 responses = process_message(sender_id, text)
                 for resp in responses:
-                    send_message(sender_id, resp)
+                    if isinstance(resp, dict) and resp.get("__type") == "quick_replies":
+                        # Send native Messenger quick reply buttons
+                        send_quick_replies(sender_id, resp["text"], [
+                            {"content_type": "text", "title": qr["label"], "payload": "QR_" + qr["message"].upper().replace(" ", "_")[:20]}
+                            for qr in resp["quick_replies"]
+                        ])
+                    else:
+                        send_message(sender_id, resp)
 
             # Handle attachments (images, stickers, etc.)
             elif "message" in event and "attachments" in event["message"]:
@@ -1230,15 +1300,12 @@ def handle_postback(sender_id, payload):
     """Handle postback events from buttons/menus."""
     if payload == "GET_STARTED":
         send_message(sender_id, GREETING_MESSAGE)
-        send_message(
+        send_quick_replies(
             sender_id,
-            "💡 အောက်ပါတို့ကို လုပ်ဆောင်နိုင်ပါတယ်:\n\n"
-            "📱 ဖုန်းအမည်/Brand ရိုက်ထည့်ပြီး ဈေးနှုန်းစစ်ဆေးပါ\n"
-            "🏪 \"ဆိုင်\" ဟုရိုက်ပြီး ဆိုင်တည်နေရာ ကြည့်ပါ\n"
-            "🛒 \"မှာမယ်\" ဟုရိုက်ပြီး အော်ဒါမှာယူပါ\n"
-            "🎬 \"review\" + ဖုန်းအမည် ရိုက်ပြီး ဗီဒီယို ကြည့်ပါ"
+            "ဘာများကူညီရမလဲ ခင်ဗျာ? \U0001f31f\nအောက်ပါ ခလုတ်များကို နှိပ်ပြီး လိုအပ်သည်ကို ရွေးချယ်နိုင်ပါတယ်။",
+            GREETING_QUICK_REPLIES
         )
-    elif payload == "PHONE_PRICES":
+    elif payload in ("PHONE_PRICES", "QR_PHONE_PRICES"):
         send_message(
             sender_id,
             "📱 ဖုန်းဈေးနှုန်း စစ်ဆေးရန်\n\n"
@@ -1250,20 +1317,42 @@ def handle_postback(sender_id, payload):
             "• Tecno\n"
             "• Infinix"
         )
-    elif payload == "PRICE_LIST":
+    elif payload in ("PRICE_LIST", "QR_PRICE_LIST"):
         send_message(sender_id, format_price_list_brands())
-    elif payload == "RESEARCH_TOOLS":
+    elif payload in ("RESEARCH_TOOLS", "QR_RESEARCH"):
         send_message(sender_id, format_research_tools())
-    elif payload == "STORE_LOCATION":
+    elif payload in ("STORE_LOCATION", "QR_STORE"):
         send_message(sender_id, STORE_INFO)
-    elif payload == "ORDER":
+    elif payload in ("ORDER", "QR_ORDER"):
         session = get_session(sender_id)
         session["state"] = "awaiting_name"
         session["order"] = {}
         send_message(
             sender_id,
-            "🛒 အော်ဒါမှာယူခြင်း\n━━━━━━━━━━━━━━━\n\n" + ORDER_STEPS["awaiting_name"]
+            "🛒 အော်ဒါမှာမယ်ခြင်း\n━━━━━━━━━━━━━━━\n\n" + ORDER_STEPS["awaiting_name"]
         )
+    elif payload == "QR_SPECS":
+        send_message(
+            sender_id,
+            "\U0001f50d Specs \u1000\u103c\u100a\u1037\u103a\u101b\u1014\u103a\n\n"
+            "\u1016\u102f\u1014\u103a\u1038\u1021\u1019\u100a\u103a\u1000\u102d\u102f \u101b\u102d\u102f\u1000\u103a\u1011\u100a\u103a\u1037\u1015\u103c\u102e\u1038 \u1015\u103c\u102f\u1015\u103c\u102e\u1038\u1015\u102b \u1001\u1004\u103a\u1018\u1017\u103b\u102c\u104b\n\n"
+            "\u1025\u1015\u1019\u102c\u104a\n"
+            "\u2022 specs iPhone 16\n"
+            "\u2022 specs Samsung S25\n"
+            "\u2022 specs Redmi Note 15"
+        )
+    elif payload == "QR_VIDEO":
+        send_message(
+            sender_id,
+            "\U0001f3ac Review \u1017\u102e\u1012\u102e\u101a\u102d\u102f \u1000\u103c\u100a\u1037\u103a\u101b\u1014\u103a\n\n"
+            "\u1016\u102f\u1014\u103a\u1038\u1021\u1019\u100a\u103a\u1000\u102d\u102f \u101b\u102d\u102f\u1000\u103a\u1011\u100a\u103a\u1037\u1015\u103c\u102e\u1038 \u1015\u103c\u102f\u1015\u103c\u102e\u1038\u1015\u102b \u1001\u1004\u103a\u1018\u1017\u103b\u102c\u104b\n\n"
+            "\u1025\u1015\u1019\u102c\u104a\n"
+            "\u2022 iPhone 16 review\n"
+            "\u2022 Samsung S25 unboxing\n"
+            "\u2022 Redmi Note 15 \u1017\u102e\u1012\u102e"
+        )
+    elif payload == "QR_CONTACT":
+        send_message(sender_id, STORE_INFO)
 
 
 # ---------------------------------------------------------------------------
@@ -1301,13 +1390,26 @@ def web_chat():
     logger.info(f"Web chat [{web_session_id}]: {message}")
     
     # Process message using the same logic as Messenger
-    responses = process_message(web_session_id, message)
+    raw_responses = process_message(web_session_id, message)
     
-    resp = jsonify({
-        "responses": responses,
+    # Separate plain text responses from quick_reply dicts
+    text_responses = []
+    quick_replies_data = None
+    for r in raw_responses:
+        if isinstance(r, dict) and r.get("__type") == "quick_replies":
+            quick_replies_data = r  # widget will render these as tap buttons
+        else:
+            text_responses.append(r)
+    
+    response_payload = {
+        "responses": text_responses,
         "session_id": session_id,
         "intent": detect_intent(message)
-    })
+    }
+    if quick_replies_data:
+        response_payload["quick_replies"] = quick_replies_data
+    
+    resp = jsonify(response_payload)
     return add_cors_headers(resp, origin)
 
 
@@ -1322,13 +1424,28 @@ def web_chat_greeting():
     
     resp = jsonify({
         "greeting": GREETING_MESSAGE,
+        "greeting_reply": {
+            "text": "ဘာများကူညီရမလဲ ခင်ဗျာ? 🌟\nအောက်ပါ ခလုတ်များကို နှိပ်ပြီး လိုအပ်သည်ကို ရွေးချယ်နိုင်ပါတယ်။",
+            "quick_replies": [
+                {"label": "📱 ဖုန်းဈေးနှုန်း",   "message": "ဖုန်းဈေးနှုန်း"},
+                {"label": "📋 ဈေးနှုန်းစာရင်း", "message": "ဈေးနှုန်းစာရင်း"},
+                {"label": "🔍 Specs ကြည့်မယ်",  "message": "specs "},
+                {"label": "🔬 Research Tools",   "message": "research tools"},
+                {"label": "🏠 ဆိုင်တည်နေရာ",   "message": "ဆိုင်"},
+                {"label": "🛒 အော်ဒါမှာမယ်",   "message": "မှာမယ်"},
+                {"label": "🎬 Review ဗီဒီယို", "message": "review"},
+                {"label": "📞 ဆက်သွယ်ရန်",     "message": "ဆက်သွယ်"}
+            ]
+        },
         "quick_actions": [
-            {"label": "📱 ဖုန်းစျေးနှုန်း", "message": "ဖုန်းစျေးနှုန်း"},
+            {"label": "📱 ဖုန်းဈေးနှုန်း",   "message": "ဖုန်းဈေးနှုန်း"},
             {"label": "📋 ဈေးနှုန်းစာရင်း", "message": "ဈေးနှုန်းစာရင်း"},
-            {"label": "🔬 Research Tools", "message": "research tools"},
-            {"label": "🏠 ဆိုင်တည်နေရာ", "message": "ဆိုင်"},
-            {"label": "🛒 အော်ဒါမှာမယ်", "message": "မှာမယ်"},
-            {"label": "🎬 YouTube", "message": "review video"}
+            {"label": "🔍 Specs ကြည့်မယ်",  "message": "specs "},
+            {"label": "🔬 Research Tools",   "message": "research tools"},
+            {"label": "🏠 ဆိုင်တည်နေရာ",   "message": "ဆိုင်"},
+            {"label": "🛒 အော်ဒါမှာမယ်",   "message": "မှာမယ်"},
+            {"label": "🎬 Review ဗီဒီယို", "message": "review"},
+            {"label": "📞 ဆက်သွယ်ရန်",     "message": "ဆက်သွယ်"}
         ]
     })
     return add_cors_headers(resp, origin)
