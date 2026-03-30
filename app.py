@@ -148,6 +148,22 @@ def fetch_all_phones_from_api():
             "img": p.get("img", ""),
         })
     
+    # Validate price data quality: reject catalog if >50% of phones have empty prices
+    # This prevents caching bad data during website price updates
+    if catalog:
+        phones_with_price = sum(1 for p in catalog if p.get("price", "").strip())
+        price_coverage = phones_with_price / len(catalog)
+        if price_coverage < 0.5:
+            logger.warning(
+                f"Price data quality check FAILED: only {phones_with_price}/{len(catalog)} "
+                f"phones ({price_coverage:.0%}) have prices. Discarding this fetch."
+            )
+            return []  # Return empty so caller knows to retry
+        logger.info(
+            f"Price data quality OK: {phones_with_price}/{len(catalog)} phones "
+            f"({price_coverage:.0%}) have prices."
+        )
+    
     return catalog
 
 def _refresh_cache_background():
@@ -160,7 +176,10 @@ def _refresh_cache_background():
                 cache_data["timestamp"] = time.time()
             logger.info(f"Background cache refresh: updated with {len(phones)} phones")
         else:
-            logger.warning("Background cache refresh: API returned no phones")
+            logger.warning(
+                "Background cache refresh: API returned no phones or failed price quality check. "
+                "Keeping existing cache data."
+            )
     t = Thread(target=_do_refresh, daemon=True)
     t.start()
 
@@ -236,17 +255,33 @@ except Exception as e:
 # Initialize cache on startup
 logger.info("Initializing phone catalog cache on startup...")
 def init_cache():
-    """Initialize cache in a background thread to not block startup."""
-    try:
-        initial_phones = fetch_all_phones_from_api()
-        if initial_phones:
-            cache_data["phones"] = initial_phones
-            cache_data["timestamp"] = time.time()
-            logger.info(f"✅ Initialized cache with {len(initial_phones)} phones")
-        else:
-            logger.warning("⚠️ Failed to initialize cache from API, will retry on first request")
-    except Exception as e:
-        logger.error(f"Error initializing cache: {e}")
+    """Initialize cache in a background thread to not block startup.
+    
+    Retries up to 3 times if the API returns data with empty prices
+    (can happen during website price updates).
+    """
+    max_retries = 3
+    retry_delay = 10  # seconds between retries
+    for attempt in range(1, max_retries + 1):
+        try:
+            initial_phones = fetch_all_phones_from_api()
+            if initial_phones:
+                cache_data["phones"] = initial_phones
+                cache_data["timestamp"] = time.time()
+                logger.info(f"✅ Initialized cache with {len(initial_phones)} phones (attempt {attempt})")
+                return  # Success
+            else:
+                logger.warning(
+                    f"⚠️ Cache init attempt {attempt}/{max_retries}: API returned no phones or "
+                    f"failed price quality check. "
+                    + (f"Retrying in {retry_delay}s..." if attempt < max_retries else "Giving up.")
+                )
+                if attempt < max_retries:
+                    time.sleep(retry_delay)
+        except Exception as e:
+            logger.error(f"Error initializing cache (attempt {attempt}): {e}")
+            if attempt < max_retries:
+                time.sleep(retry_delay)
 
 # Start cache initialization in background thread
 init_thread = Thread(target=init_cache, daemon=True)
