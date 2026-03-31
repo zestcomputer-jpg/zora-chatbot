@@ -989,9 +989,26 @@ def handle_order_flow(sender_id, text, session):
         phone = text.strip()
         # Basic phone validation
         phone_digits = re.sub(r'[^\d]', '', phone)
+        
+        # Check if this might be a phone model name instead of a phone number
+        # This helps users who accidentally type a phone model during order flow
         if len(phone_digits) < 8:
-            responses.append("⚠️ ဖုန်းနံပါတ် မှားနေပါတယ်။ ထပ်မံရိုက်ထည့်ပေးပါ ခင်ဗျာ။\n(ဥပမာ - 09xxxxxxxxx)")
-            return responses
+            # Try searching for it as a phone model
+            potential_phones = search_phones(phone)
+            if potential_phones:
+                # User likely typed a phone model name, not a phone number
+                responses.append(
+                    f"📱 \"{phone}\" သည် ဖုန်းမော်ဒယ်အမည်ကဲ့သို့ ထင်ရှားပါတယ်။\n\n"
+                    f"💡 အော်ဒါမှာယူရန် သင့်ဖုန်းနံပါတ်ကို ပြောပြပေးပါ ခင်ဗျာ။\n"
+                    f"(ဥပမာ - 09xxxxxxxxx)\n\n"
+                    f"📱 \"{ potential_phones[0]['brand']} {potential_phones[0]['name']}\" ၏ ဈေးနှုန်းကို ကြည့်လိုပါက \"cancel\" ရိုက်ပြီး \"{ potential_phones[0]['brand']} {potential_phones[0]['name']}\" ကို ရိုက်ပါ။"
+                )
+                return responses
+            else:
+                # Not a phone model either, show error
+                responses.append("⚠️ ဖုန်းနံပါတ် မှားနေပါတယ်။ ထပ်မံရိုက်ထည့်ပေးပါ ခင်ဗျာ။\n(ဥပမာ - 09xxxxxxxxx)")
+                return responses
+        
         session["order"]["phone"] = phone
         session["state"] = "awaiting_address"
         responses.append(f"✅ ဖုန်းနံပါတ် - {phone}\n\n" + ORDER_STEPS["awaiting_address"])
